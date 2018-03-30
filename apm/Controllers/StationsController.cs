@@ -20,12 +20,6 @@ namespace apm.Controllers
 
         #region HTTP GET
 
-        //[HttpGet]
-        //public IEnumerable<Station> GetStations()
-        //{
-        //    return db.Stations.ToList();
-        //}
-
         // GET api/points
         [HttpGet]
         public async Task<IActionResult> GetStations(int? id, string sensor, bool? isMobile, DateTime? additionDate)
