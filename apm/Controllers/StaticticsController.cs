@@ -20,7 +20,7 @@ namespace apm.Controllers
         #region HTTP GET
         /// <summary>Returns daily statistics.</summary>
         /// <remarks>Daily average concentration of suspended dusts</remarks>
-        /// <param name="date">Day</param>
+        /// <param name="date">Date</param>
         // GET api/statistics/daily
         [HttpGet("daily")]
         public Statistic GetDaily(DateTime date)
@@ -45,7 +45,7 @@ namespace apm.Controllers
 
         /// <summary>Returns weekly statistics.</summary>
         /// <remarks>Weekly average concentration of suspended dusts</remarks>
-        /// <param name="date">Week</param>
+        /// <param name="date">Date</param>
         // GET api/statistics/weekly
         [HttpGet("weekly")]
         public Statistic GetWeekly(DateTime date)
@@ -75,7 +75,7 @@ namespace apm.Controllers
 
         /// <summary>Returns monthly statistics.</summary>
         /// <remarks>Monthly average concentration of suspended dusts</remarks>
-        /// <param name="date">Month</param>
+        /// <param name="date">Date</param>
         // GET api/statistics/monthly
         [HttpGet("monthly")]
         public Statistic GetMonthly(DateTime date)
@@ -100,7 +100,8 @@ namespace apm.Controllers
 
         /// <summary>Returns monthly statistics.</summary>
         /// <remarks>Monthly average concentration of suspended dusts</remarks>
-        /// <param name="date">Month</param>
+        /// <param name="dateStart">Start date</param>
+        /// <param name="dateEnd">End date</param>
         // GET api/statistics/monthly
         [HttpGet("dateRange")]
         public Statistic GetDateRange(DateTime dateStart, DateTime dateEnd)
