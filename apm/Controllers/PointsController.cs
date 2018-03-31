@@ -21,7 +21,10 @@ namespace apm.Controllers
 
         // GET api/points
         [HttpGet]
-        public async Task<IActionResult> GetPoints(int? id, float? latStart, float? latEnd, float? lngStart, float? lngEnd, DateTime? startDate, DateTime? endDate)
+        public async Task<IActionResult> GetPoints(int? id, 
+                                                    float? latStart, float? latEnd, float? lngStart, float? lngEnd, 
+                                                    DateTime? startDate, DateTime? endDate, 
+                                                    int? pm01_0_Min, int? pm01_0_Max, int? pm02_5_Min, int? pm02_5_Max, int? pm10_0_Min, int? pm10_0_Max)
         {
             IQueryable<Point> query = db.Points.OrderByDescending(c => c.id);
 
@@ -45,6 +48,24 @@ namespace apm.Controllers
 
             if (endDate != null)
                 query = query.Where(c => c.DateTime <= endDate);
+
+            if (pm01_0_Min != null)
+                query = query.Where(c => c.pm01_0 >= pm01_0_Min);
+
+            if (pm01_0_Max != null)
+                query = query.Where(c => c.pm01_0 <= pm01_0_Max);
+
+            if (pm02_5_Min != null)
+                query = query.Where(c => c.pm02_5 >= pm02_5_Min);
+
+            if (pm02_5_Max != null)
+                query = query.Where(c => c.pm02_5 <= pm02_5_Max);
+
+            if (pm10_0_Min != null)
+                query = query.Where(c => c.pm10_0 >= pm10_0_Min);
+
+            if (pm10_0_Max != null)
+                query = query.Where(c => c.pm10_0 <= pm10_0_Max);
 
             try
             {
