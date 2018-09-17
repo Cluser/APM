@@ -24,7 +24,7 @@ namespace apm
                 .UseKestrel(options =>
                 {
                     // listen to requests from outside the local machine
-                    options.Listen(IPAddress.Any, 5000);
+                    options.Listen(IPAddress.Any, 80);
                 })
                 .Build();
     }

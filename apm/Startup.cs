@@ -58,7 +58,7 @@ namespace apm
             // Auto update of database (EF)
             var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope();
             var context = serviceScope.ServiceProvider.GetRequiredService<ApmContext>();
-            context.Database.Migrate();
+            // context.Database.Migrate();
 
             // Global policy - assign here or on each controller
             app.UseCors("CorsPolicy");

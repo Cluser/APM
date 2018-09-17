@@ -24,6 +24,10 @@ namespace apm.Controllers
 
         #region HTTP GET
         /// <summary>Returns users registred in system.</summary>
+        /// <param name="id">ID of user</param>
+        /// <param name="name">User name</param>
+        /// <param name="surname">User surname</param>
+        /// <param name="phoneNumber">User phone number</param>
         [HttpGet]
         public async Task<IActionResult> GetUsers(int? id, string name, string surname, string phoneNumber)
         {

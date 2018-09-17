@@ -23,23 +23,33 @@ namespace apm.Controllers
         /// <param name="date">Date</param>
         // GET api/statistics/daily
         [HttpGet("daily")]
-        public Statistic GetDaily(DateTime date)
+       
+        public Statistic GetDaily(DateTime date, int? startHour, int? endHour)
         {
             Statistic statistic = new Statistic();
             
             // Sum up concentration of suspended dusts
-            int sumPm01_0 = db.Points.AsEnumerable().Where(c => c.DateTime.Date == date.Date).Sum(row => row.pm01_0);
-            int sumPm02_5 = db.Points.AsEnumerable().Where(c => c.DateTime.Date == date.Date).Sum(row => row.pm02_5);
-            int sumPm10_0 = db.Points.AsEnumerable().Where(c => c.DateTime.Date == date.Date).Sum(row => row.pm10_0);
-
+            int sumPm01_0 = db.Points.AsEnumerable().Where(c => c.DateTime.Date == date.Date &&
+                                                                c.DateTime.Hour >= startHour && 
+                                                                c.DateTime.Hour <= endHour)
+                                                                .Sum(row => row.pm01_0);
+            int sumPm02_5 = db.Points.AsEnumerable().Where(c => c.DateTime.Date == date.Date &&
+                                                                c.DateTime.Hour >= startHour && 
+                                                                c.DateTime.Hour <= endHour)
+                                                                .Sum(row => row.pm02_5);
+            int sumPm10_0 = db.Points.AsEnumerable().Where(c => c.DateTime.Date == date.Date &&
+                                                                c.DateTime.Hour >= startHour &&
+                                                                c.DateTime.Hour <= endHour)
+                                                                .Sum(row => row.pm10_0);
+        
             // Count number of measures
             int recordsCount = db.Points.AsEnumerable().Where(c => c.DateTime.Date == date.Date).Count();
-
+        
             // Calculate average concentration of suspended dusts
             statistic.pm01_0 = sumPm01_0 / recordsCount;
             statistic.pm02_5 = sumPm02_5 / recordsCount;
             statistic.pm10_0 = sumPm10_0 / recordsCount;
-
+        
             return statistic;
         }
 
@@ -66,7 +76,7 @@ namespace apm.Controllers
             int recordsCount = db.Points.AsEnumerable().Where(c => c.DateTime.Date == DateTime.Now.Date).Count();
 
             // Calculate average concentration of suspended dusts
-            //statistic.pm01_0 = sumPm01_0 / recordsCount;
+            statistic.pm01_0 = sumPm01_0 / recordsCount;
             statistic.pm02_5 = sumPm02_5 / recordsCount;
             statistic.pm10_0 = sumPm10_0 / recordsCount;
             
